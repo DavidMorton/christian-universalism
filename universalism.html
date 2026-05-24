@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#1a2332" />
+<title>On Christian Universalism</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    background: #faf9f6;
+    color: #44403c;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .serif { font-family: 'Cormorant Garamond', Georgia, serif; }
+  .body-serif { font-family: 'Cardo', Georgia, serif; }
+  .greek { font-family: 'Cardo', 'Times New Roman', serif; font-style: normal; color: #292524; font-weight: 500; }
+
+  /* ========== HEADER ========== */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 40;
+    background: #1a2332;
+    color: #f5f5f4;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-bottom: 1px solid #3a4556;
+  }
+  .header-inner {
+    padding-top: calc(env(safe-area-inset-top) + 0.5rem);
+  }
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+  }
+  .header-title { flex: 1; min-width: 0; }
+  .header-title h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.01em;
+    color: #fafaf9;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .header-title .subtitle {
+    font-size: 0.625rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #a8a29e;
+    margin-top: 0.125rem;
+  }
+  .menu-btn {
+    background: transparent;
+    border: none;
+    color: #f5f5f4;
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    margin-left: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .menu-btn:hover { background: #2a3548; }
+
+  .tabs {
+    display: flex;
+    overflow-x: auto;
+    border-top: 1px solid #2a3548;
+    padding: 0.375rem 0.75rem;
+    gap: 0.25rem;
+    background: #1a2332;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.5rem 0.75rem;
+    white-space: nowrap;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    border-radius: 0.375rem;
+    color: #a8a29e;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .tab:hover { color: #e7e5e4; }
+  .tab.active { color: #d4af7a; background: #2a3548; }
+  .tab svg { width: 12px; height: 12px; }
+
+  /* ========== SLIDE MENU ========== */
+  .backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    z-index: 40;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .backdrop.open { opacity: 1; pointer-events: auto; }
+
+  .slidemenu {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 20rem;
+    max-width: 85vw;
+    background: #1a2332;
+    color: #f5f5f4;
+    z-index: 50;
+    transform: translateX(100%);
+    transition: transform 0.3s;
+    box-shadow: -8px 0 24px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+  }
+  .slidemenu.open { transform: translateX(0); }
+  .slidemenu-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem;
+    border-bottom: 1px solid #2a3548;
+    padding-top: calc(1.25rem + env(safe-area-inset-top));
+  }
+  .slidemenu-header p {
+    margin: 0;
+    font-size: 0.625rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #a8a29e;
+  }
+  .slidemenu-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 0.75rem;
+  }
+  .slidemenu-item {
+    display: block;
+    width: 100%;
+    text-align: left;
+    padding: 0.75rem 1rem;
+    border-radius: 0.375rem;
+    background: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    margin-bottom: 0.25rem;
+    transition: background 0.15s;
+  }
+  .slidemenu-item:hover { background: #2a3548; }
+  .slidemenu-item.sub {
+    margin-left: 1rem;
+    border-left: 2px solid rgba(212, 175, 122, 0.3);
+    padding-left: 1rem;
+    border-radius: 0;
+  }
+  .slidemenu-item .item-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    color: #f5f5f4;
+  }
+  .slidemenu-item .item-sub {
+    font-size: 0.75rem;
+    color: #a8a29e;
+    margin-top: 0.125rem;
+  }
+
+  /* ========== MAIN CONTENT ========== */
+  main {
+    padding-top: calc(7.5rem + env(safe-area-inset-top));
+    padding-bottom: 6rem;
+    min-height: 100vh;
+  }
+  .container {
+    max-width: 42rem;
+    margin: 0 auto;
+    padding: 0 1.25rem;
+  }
+
+  .epigraph {
+    text-align: center;
+    padding: 1rem 0 1.5rem;
+  }
+  .epigraph .text {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #78716c;
+  }
+  .epigraph .ref {
+    font-size: 0.625rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #a8a29e;
+    margin-top: 0.5rem;
+  }
+  .ornament::before, .ornament::after {
+    content: '✦';
+    color: #a8956c;
+    margin: 0 0.75rem;
+    font-size: 0.7em;
+    vertical-align: middle;
+  }
+
+  section {
+    padding: 1.5rem 0 0.5rem;
+    scroll-margin-top: 8rem;
+  }
+  .section-header { margin-bottom: 1.5rem; }
+  .section-eyebrow {
+    font-size: 0.625rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #a8956c;
+    margin: 0 0 0.5rem 0;
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.875rem;
+    font-weight: 600;
+    color: #292524;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .section-rule {
+    width: 3rem;
+    height: 2px;
+    background: #a8956c;
+    margin-top: 0.75rem;
+  }
+  h3.subhead {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #44403c;
+    margin: 2rem 0 0.75rem;
+    scroll-margin-top: 8rem;
+  }
+  h3.subhead .light { color: #78716c; font-weight: 400; }
+
+  .prose {
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #44403c;
+    margin: 0 0 1rem 0;
+  }
+  .verse-inline {
+    font-family: 'Cardo', Georgia, serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    color: #78716c;
+    margin: -0.5rem 0 1rem 0;
+    line-height: 1.6;
+  }
+
+  .divider {
+    margin: 2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .divider .line { height: 1px; width: 3rem; background: #d6d3d1; }
+  .divider .star { margin: 0 0.75rem; color: #a8956c; font-size: 0.75rem; }
+  .divider.light { opacity: 0.5; }
+
+  blockquote.bq {
+    margin: 1.5rem 0;
+    padding-left: 1.25rem;
+    border-left: 2px solid #a8956c;
+  }
+  blockquote.bq .quote {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    font-size: 1.125rem;
+    color: #44403c;
+    line-height: 1.4;
+    margin: 0;
+  }
+  blockquote.bq .attribution {
+    font-size: 0.75rem;
+    color: #78716c;
+    margin-top: 0.5rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .verseblock {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f5f5f4;
+    border-left: 4px solid #1a2332;
+    border-radius: 0 0.25rem 0.25rem 0;
+  }
+  .verseblock p {
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: #292524;
+    font-style: italic;
+    margin: 0;
+  }
+
+  .callout {
+    margin: 1.25rem 0;
+    padding: 1.25rem;
+    background: #faf6ed;
+    border: 1px solid #e8dcc0;
+    border-radius: 0.375rem;
+  }
+  .callout .callout-title {
+    font-size: 0.625rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #8a7548;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+  }
+  .callout > div, .callout p, .callout ol {
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: #44403c;
+  }
+  .callout p { margin: 0 0 0.75rem 0; }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout ol {
+    padding-left: 1.25rem;
+    margin: 0.5rem 0;
+  }
+  .callout ol li { margin-bottom: 0.25rem; }
+
+  /* ========== COLLAPSIBLES ========== */
+  .collapsible {
+    margin: 0.75rem 0;
+    border: 1px solid #e7e5e4;
+    border-radius: 0.375rem;
+    overflow: hidden;
+    background: white;
+  }
+  .collapsible-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.875rem 1rem;
+    text-align: left;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+    color: inherit;
+  }
+  .collapsible-btn:hover { background: #fafaf9; }
+  .collapsible-btn .title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: #292524;
+    padding-right: 1rem;
+  }
+  .collapsible-btn .chevron {
+    color: #78716c;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .collapsible.open .chevron { transform: rotate(90deg); }
+  .collapsible-content {
+    display: none;
+    padding: 0.25rem 1rem 1rem 1rem;
+    border-top: 1px solid #f5f5f4;
+  }
+  .collapsible.open .collapsible-content { display: block; animation: fadeIn 0.3s; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ========== GRIDS ========== */
+  .objgrid {
+    display: grid;
+    gap: 0.625rem;
+    margin: 1rem 0;
+  }
+  .objgrid .item {
+    padding: 0.875rem;
+    background: white;
+    border: 1px solid #e7e5e4;
+    border-radius: 0.375rem;
+  }
+  .objgrid .item .t {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #292524;
+    margin: 0 0 0.25rem 0;
+  }
+  .objgrid .item .d {
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 0.875rem;
+    color: #57534e;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .questions { margin: 1rem 0; }
+  .question {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .question .num {
+    flex-shrink: 0;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.5rem;
+    color: #a8956c;
+    line-height: 1;
+  }
+  .question .body { flex: 1; }
+  .question .q {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #292524;
+    margin: 0 0 0.25rem 0;
+    line-height: 1.3;
+  }
+  .question .a {
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 0.875rem;
+    color: #57534e;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* ========== VERSE LIST ========== */
+  .key-dot {
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: #a8956c;
+    vertical-align: middle;
+    margin: 0 0.125rem;
+  }
+  .verselist { margin: 0.75rem 0; }
+  .vitem {
+    border: 1px solid #e7e5e4;
+    border-radius: 0.375rem;
+    overflow: hidden;
+    background: white;
+    margin-bottom: 0.375rem;
+    transition: all 0.15s;
+  }
+  .vitem.key {
+    border-color: rgba(168, 149, 108, 0.4);
+    background: rgba(250, 246, 237, 0.4);
+  }
+  .vitem-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.625rem 0.875rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    color: inherit;
+  }
+  .vitem-btn:hover { background: #fafaf9; }
+  .vitem-btn .ref-line {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+  }
+  .vitem-btn .ref {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #292524;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .vitem-btn .chevron {
+    color: #a8a29e;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .vitem.open .vitem-btn .chevron { transform: rotate(90deg); }
+  .vitem-content {
+    display: none;
+    padding: 0.25rem 0.875rem 0.875rem;
+  }
+  .vitem.open .vitem-content { display: block; animation: fadeIn 0.3s; }
+  .vitem-content .text {
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    color: #44403c;
+    font-style: italic;
+    margin: 0;
+  }
+  .vitem-content .note {
+    font-size: 0.75rem;
+    color: #8a7548;
+    font-style: italic;
+    margin-top: 0.5rem;
+  }
+
+  /* ========== PASSAGE / GREEK / MATRIX ========== */
+  h3.passage {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #292524;
+    margin: 2rem 0 0.5rem;
+    line-height: 1.2;
+  }
+  .gex {
+    margin: 0.75rem 0;
+    padding-left: 1rem;
+    border-left: 2px solid #d6d3d1;
+  }
+  .gex .ref {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #78716c;
+    margin: 0 0 0.25rem 0;
+  }
+  .gex .text {
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 0.875rem;
+    color: #44403c;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+  }
+  .gex .note {
+    font-size: 0.75rem;
+    color: #8a7548;
+    font-style: italic;
+    margin-top: 0.25rem;
+  }
+
+  .matrix {
+    margin: 1.25rem 0;
+    overflow: hidden;
+    border-radius: 0.375rem;
+    border: 1px solid #d6d3d1;
+  }
+  .matrix table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+  .matrix thead tr { background: #1a2332; color: #f5f5f4; }
+  .matrix th {
+    padding: 0.625rem;
+    text-align: left;
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    border-left: 1px solid #2a3548;
+  }
+  .matrix th:first-child { border-left: none; }
+  .matrix tbody { font-family: 'Cardo', Georgia, serif; }
+  .matrix td {
+    padding: 0.75rem;
+    border-top: 1px solid #e7e5e4;
+    border-left: 1px solid #e7e5e4;
+    color: #44403c;
+  }
+  .matrix td:first-child {
+    background: #f5f5f4;
+    font-size: 0.75rem;
+    border-left: none;
+  }
+  .matrix .nonsense { color: #78716c; font-style: italic; }
+  .matrix .winner { color: #8a7548; font-weight: 500; }
+  .matrix-note {
+    font-size: 0.75rem;
+    color: #78716c;
+    font-style: italic;
+    margin-top: 0.5rem;
+    padding-left: 0.25rem;
+  }
+
+  .closing-line {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-style: italic;
+    color: #78716c;
+    text-align: center;
+    margin: 1.5rem 0;
+    font-size: 0.875rem;
+  }
+
+  /* ========== BACK TO TOP ========== */
+  .totop {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.25rem;
+    z-index: 30;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 50%;
+    background: #1a2332;
+    color: #f5f5f4;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    display: none;
+    align-items: center;
+    justify-content: center;
+  }
+  .totop.show { display: flex; }
+  .totop:hover { background: #2a3548; }
+
+  /* ========== DARK MODE ========== */
+  @media (prefers-color-scheme: dark) {
+    body {
+      background: #15171c;
+      color: #d6d3d1;
+    }
+
+    /* Header & menu — keep similar but slightly adjusted */
+    header {
+      background: #0f1419;
+      border-bottom-color: #2a3548;
+    }
+    .header-top, .tabs { background: #0f1419 !important; }
+    .tabs { border-top-color: #1f2937; }
+    .tab.active { background: #1f2937; color: #e4c891; }
+    .menu-btn:hover { background: #1f2937; }
+
+    .slidemenu { background: #0f1419; }
+    .slidemenu-header { background: #0f1419; border-bottom-color: #2a3548; }
+    .slidemenu-item:hover { background: #1f2937; }
+
+    /* Epigraph & section headers — gold pops more in dark */
+    .epigraph .text { color: #a8a29e; }
+    .epigraph .ref { color: #78716c; }
+    .section-eyebrow { color: #c9a87a; }
+    .section-title { color: #f5f5f4; }
+    .section-rule { background: #c9a87a; }
+    h3.subhead { color: #e7e5e4; }
+    h3.subhead .light { color: #a8a29e; }
+    h3.passage { color: #f5f5f4; }
+
+    /* Body text — much brighter for readability */
+    .prose { color: #d6d3d1; }
+    .verse-inline { color: #a8a29e; }
+    .closing-line { color: #a8a29e; }
+
+    /* Dividers */
+    .divider .line { background: #44403c; }
+    .divider .star { color: #c9a87a; }
+
+    /* Blockquote */
+    blockquote.bq { border-left-color: #c9a87a; }
+    blockquote.bq .quote { color: #e7e5e4; }
+    blockquote.bq .attribution { color: #a8a29e; }
+
+    /* Verse blocks — dark with light text */
+    .verseblock {
+      background: #1c1f26;
+      border-left-color: #c9a87a;
+    }
+    .verseblock p { color: #e7e5e4; }
+
+    /* Callouts — warm dark, not too jarring */
+    .callout {
+      background: #1f1a14;
+      border-color: #3d3424;
+    }
+    .callout .callout-title { color: #d4af7a; }
+    .callout, .callout p, .callout ol { color: #d6d3d1; }
+
+    /* Collapsibles */
+    .collapsible {
+      background: #1c1f26;
+      border-color: #2a3548;
+    }
+    .collapsible-btn:hover { background: #232730; }
+    .collapsible-btn .title { color: #f5f5f4; }
+    .collapsible-btn .chevron { color: #a8a29e; }
+    .collapsible-content { border-top-color: #2a3548; }
+
+    /* Greek terms — soft cream to stand out */
+    .greek { color: #f5e6c8; }
+
+    /* Objection grid */
+    .objgrid .item {
+      background: #1c1f26;
+      border-color: #2a3548;
+    }
+    .objgrid .item .t { color: #f5f5f4; }
+    .objgrid .item .d { color: #c4c0bc; }
+
+    /* Question list */
+    .question .num { color: #c9a87a; }
+    .question .q { color: #f5f5f4; }
+    .question .a { color: #c4c0bc; }
+
+    /* Verse list */
+    .vitem {
+      background: #1c1f26;
+      border-color: #2a3548;
+    }
+    .vitem.key {
+      background: #221d15;
+      border-color: rgba(212, 175, 122, 0.4);
+    }
+    .vitem-btn:hover { background: #232730; }
+    .vitem-btn .ref { color: #f5f5f4; }
+    .vitem-btn .chevron { color: #a8a29e; }
+    .vitem-content .text { color: #d6d3d1; }
+    .vitem-content .note { color: #d4af7a; }
+
+    /* Greek examples */
+    .gex { border-left-color: #44403c; }
+    .gex .ref { color: #a8a29e; }
+    .gex .text { color: #d6d3d1; }
+    .gex .note { color: #d4af7a; }
+
+    /* Matrix */
+    .matrix { border-color: #2a3548; }
+    .matrix thead tr { background: #0f1419; }
+    .matrix td {
+      border-top-color: #2a3548;
+      border-left-color: #2a3548;
+      color: #d6d3d1;
+    }
+    .matrix td:first-child {
+      background: #1c1f26;
+      color: #a8a29e;
+    }
+    .matrix .nonsense { color: #a8a29e; }
+    .matrix .winner { color: #e4c891; }
+    .matrix-note { color: #a8a29e; }
+
+    /* Key dot — slightly brighter */
+    .key-dot { background: #c9a87a; }
+
+    /* Back to top */
+    .totop { background: #1f2937; }
+    .totop:hover { background: #2a3548; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+  <div class="header-top">
+    <div class="header-title">
+      <h1>On Christian Universalism</h1>
+      <div class="subtitle">A Personal Theological Outline</div>
+    </div>
+    <button class="menu-btn" id="menuOpenBtn" aria-label="Menu">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-target="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>What It Is</button>
+    <button class="tab" data-target="terminology"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M22 17H5a2 2 0 0 0 0 4h13a2 2 0 0 0 2-2v-3z"/><path d="M4 3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2"/></svg>Terminology</button>
+    <button class="tab" data-target="philosophical"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Philosophical</button>
+    <button class="tab" data-target="social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 5L18 9.5 13.5 11 12 16l-1.5-5L6 9.5 10.5 8z"/></svg>Social Impact</button>
+    <button class="tab" data-target="for"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Scripture For</button>
+    <button class="tab" data-target="against"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Responses</button>
+  </div>
+  </div>
+</header>
+
+<div class="backdrop" id="backdrop"></div>
+<nav class="slidemenu" id="slidemenu">
+  <div class="slidemenu-header">
+    <p>Quick Navigation</p>
+    <button class="menu-btn" id="menuCloseBtn" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="slidemenu-list">
+    <button class="slidemenu-item" data-target="overview"><div class="item-title">What It Is</div><div class="item-sub">Justification, sanctification, evangelism</div></button>
+    <button class="slidemenu-item" data-target="terminology"><div class="item-title">Notes on Terminology</div><div class="item-sub">"Death," tradition, Trench, αἰώνιος</div></button>
+    <button class="slidemenu-item" data-target="philosophical"><div class="item-title">Philosophical Impetus</div><div class="item-sub">Mercy, proportion, free will</div></button>
+    <button class="slidemenu-item sub" data-target="questions"><div class="item-title">Haunting Questions</div><div class="item-sub">Babies, the unevangelized, accidents of timing</div></button>
+    <button class="slidemenu-item" data-target="social"><div class="item-title">Social Consequences</div><div class="item-sub">Andrea Yates, retributive justice</div></button>
+    <button class="slidemenu-item" data-target="for"><div class="item-title">Scripture For</div><div class="item-sub">The "all" passages + refining fire</div></button>
+    <button class="slidemenu-item sub" data-target="all-passages"><div class="item-title">The "All" Passages</div><div class="item-sub">24 verses on justification</div></button>
+    <button class="slidemenu-item sub" data-target="refining-passages"><div class="item-title">Refining Passages</div><div class="item-sub">8 verses on sanctification</div></button>
+    <button class="slidemenu-item" data-target="against"><div class="item-title">Responding to Pro-ECT</div><div class="item-sub">Matt 25, Luke 16, Rev 14 & 20, 2 Thess 1</div></button>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+
+    <div class="epigraph">
+      <div class="text ornament">that God may be all in all</div>
+      <div class="ref">1 Corinthians 15:28</div>
+    </div>
+
+    <!-- ========== WHAT IT IS ========== -->
+    <section id="overview">
+      <div class="section-header">
+        <div class="section-eyebrow">The view in summary</div>
+        <h2 class="section-title">What It Is</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <p class="prose">Christian Universalism accepts most tenets of Christian tradition — the Trinity, the deity of Christ, that nobody comes to the Father but by Him — but rejects both eternal conscious torment and annihilationism. Instead, the afterlife is a place where all will be refined and prepared to take part in God's kingdom, with an eventual reconciliation of all to God, that Christ might be all in all.</p>
+      <div class="verse-inline">Colossians 1:19-20 · Philippians 2:10-11 · 1 Timothy 4:10</div>
+
+      <h3 class="subhead">Justification vs. Sanctification</h3>
+      <p class="prose">There is a clear distinction between justification and sanctification. Each human is <em>already</em> justified on account of the blood of Christ, because Christ's sacrifice pays the penalty for all. Each person, however, has a choice about the <em>timing</em> of sanctification — we can be sanctified now or later, but sanctification will certainly happen.</p>
+      <p class="prose">Sanctification in eternity <em>is</em> God's judgment, and is always more severe than reconciliation on earth. Those who choose earthly sanctification will not experience the same level of judgment when faced with the glory of God, though some judgment remains. All will eventually be saved — though some as through fire.</p>
+      <div class="verse-inline">1 John 2:2 · Romans 5:18 · 1 Cor 15:22 · Titus 2:11 · Romans 8:30 · Matt 5:25-26 · Mark 9:49 · Mal 3:2-3 · 1 Cor 3:14-15</div>
+
+      <h3 class="subhead">So what's the point of evangelism?</h3>
+      <p class="prose">If everyone is justified, why evangelize? Evangelism is still about bringing people to repentance — but not so they may be justified. The motive is to preach the good news of reconciliation so people might hear, repent, and begin living a life worthy of the gospel. This leads to experiential joy in this life (John 10:10) and to a reduced expectation of judgment (Hebrews 10:26–27). All people, believers and unbelievers, will still be judged by what they do.</p>
+      <div class="verse-inline">Romans 14:10-12 · Acts 17:30-31 · 2 Cor 5:10 · Matt 25:31-32 · Rev 20:12</div>
+    </section>
+
+    <div class="divider"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+    <!-- ========== TERMINOLOGY ========== -->
+    <section id="terminology">
+      <div class="section-header">
+        <div class="section-eyebrow">Where translation shapes theology</div>
+        <h2 class="section-title">Notes on Terminology</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <div class="collapsible">
+        <button class="collapsible-btn">
+          <span class="title">On the word "Death"</span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="collapsible-content">
+          <p class="prose">The framework of ECT depends on a very specific understanding of <em>death</em>. In the traditional view, death is often equated with "eternal separation from God" — but this is pure eisegesis. Christian Universalism insists upon the plain meaning of the word, both in the straightforward physical sense and in the metaphorical sense of something being rendered powerless.</p>
+          <p class="prose">This is likely why many post-ECT Christian Universalists pass through annihilationism first. Choosing the plain meaning of a word immediately puts them out of step with the traditional view, which redefines the word to fit the target theology.</p>
+        </div>
+      </div>
+
+      <div class="collapsible">
+        <button class="collapsible-btn">
+          <span class="title">The Pervasive Influence of Tradition</span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="collapsible-content">
+          <p class="prose">One major stumbling block is the sheer number of interpretational reference works — Bible dictionaries, study Bibles, concordances, commentaries — that have absorbed the ECT viewpoint. The word "death," for example, may be explicitly defined in these works as "eternal separation from God."</p>
+          <div class="callout">
+            <div class="callout-title">A case study: Trench's Synonyms</div>
+            <p>Richard Trench's <em>Synonyms of the New Testament</em> compares two words for punishment: <span class="greek">τιμωρία</span> and <span class="greek">κόλασις</span> — the latter used in Matthew 25:46. In Classical Greek, <span class="greek">κόλασις</span> refers almost exclusively to <strong>corrective</strong> punishment. But to read it as corrective in Matthew would allow Universalism, so Trench declared it a "very serious error" to do so.</p>
+            <p>Contemporaneously, Trench's friend F.D. Maurice — an Anglican minister — had written that <span class="greek">αἰώνιος</span> likely refers to "of the age," and is qualitative rather than quantitative. Though Maurice <em>denied</em> being a Universalist, his view so threatened the establishment that he was dismissed from King's College for teaching opinions "calculated to unsettle the minds of the theological students."</p>
+            <p>One year later, Trench published his lexicon explicitly excluding <em>correction</em> as a meaning of <span class="greek">κόλασις</span> — rendering the αἰώνιος debate moot and forcing the retributive reading of Matthew 25:46.</p>
+          </div>
+          <p class="prose">Theological viewpoints have stickiness. We bring assumptions to the text (eisegesis), confirm them with resources (confirmation bias), and write new works carrying the same view — which become evidence for future works. Kuhn called this <em>paradigm entrenchment</em>; Gadamer called it the <em>hermeneutical circle</em>. Today we'd call it an echo chamber.</p>
+        </div>
+      </div>
+
+      <div class="collapsible">
+        <button class="collapsible-btn">
+          <span class="title">What This Means Hermeneutically</span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="collapsible-content">
+          <p class="prose">We are all subject to the echo chamber. A good student of the Bible ought to test traditional interpretations. The challenge is that the line between inspiration and interpretation is genuinely blurred. Something is <em>always</em> lost in translation. Scholars rise to clarify the ambiguous, and these clarifications become durable because of the echo chamber.</p>
+          <p class="prose">With God there is no "strength in numbers" if we are all wrong about ECT (Romans 3:4). If ECT is incorrect, then a large portion of the Western Christian world has cast a dark shadow on the love and mercy of God. For this reason — and because of Jesus' stark warnings against those who cause little ones to stumble — the burden of proof should lie with those who hold ECT.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+    <!-- ========== PHILOSOPHICAL ========== -->
+    <section id="philosophical">
+      <div class="section-header">
+        <div class="section-eyebrow">What pushed the door open</div>
+        <h2 class="section-title">Emotional &amp; Philosophical Impetus</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <p class="prose">It would be dishonest to deny the emotional and philosophical challenges of holding to a viewpoint as inconsistent with God's character as ECT. These personal challenges spurred a deeper analysis of the text. In 2025 and 2026, I experienced what I can only describe as a deconstruction of the faith I held at the time (then, annihilationism). I could no longer have faith in a God who would destroy a large portion of the creation he had made.</p>
+      <p class="prose">In May of 2026 I encountered a book called <em>The Christian Universalist</em>. Almost overnight I was overjoyed — not only did God desire all to come to reconciliation, but he has made a way for it to happen. A God who is truly all-in-all ignited my then-laconic spirituality, and I wanted to see if this view could be honestly defended from the text. I was overjoyed to find that it can.</p>
+
+      <h3 class="subhead">Objections that wouldn't resolve</h3>
+      <div class="objgrid">
+        <div class="item"><div class="t">Inconsistent with God's mercy</div><div class="d">Eternal hell and annihilation don't fit God's revealed love and mercy.</div></div>
+        <div class="item"><div class="t">Casts doubt on God's character</div><div class="d">If God is merciful and yet cannot save, his omnipotence is in question.</div></div>
+        <div class="item"><div class="t">Disproportionate punishment</div><div class="d">Infinite punishment for finite sin violates eye-for-an-eye.</div></div>
+        <div class="item"><div class="t">Reduces heavenly joy</div><div class="d">When Thanos did it, it wasn't good. Heaven without grandma isn't as good.</div></div>
+        <div class="item"><div class="t">Makes evil eternal</div><div class="d">Eternal hell paired with strong free will makes evil a permanent feature of reality.</div></div>
+        <div class="item"><div class="t">Ignores restorative justice</div><div class="d">Given the choice between reconciliation and retribution — which does God prefer?</div></div>
+      </div>
+
+      <h3 class="subhead" id="questions">The Questions That Haunted</h3>
+      <div class="questions">
+        <div class="question"><div class="num">01</div><div class="body"><div class="q">What of aborted babies?</div><div class="a">ECT and annihilationism have no good answer — only "age of accountability" arguments with scant scriptural support. Christian Universalism has a ready and comforting answer.</div></div></div>
+        <div class="question"><div class="num">02</div><div class="body"><div class="q">What of those who never heard?</div><div class="a">Partial reconciliation requires philosophical gymnastics here, from "they just go to hell, who are you to question" to throwing hands up entirely.</div></div></div>
+        <div class="question"><div class="num">03</div><div class="body"><div class="q">Does eternity hinge on an accident of timing?</div><div class="a">Two men in a war. One dies by a bullet. The other lives to attend a Billy Graham revival. One goes to hell forever; one is saved. Really?</div></div></div>
+        <div class="question"><div class="num">04</div><div class="body"><div class="q">What of those unable to believe?</div><div class="a">Some lack the mental capacity to hold faith. What of them?</div></div></div>
+        <div class="question"><div class="num">05</div><div class="body"><div class="q">What of my wayward child?</div><div class="a">Under partial reconciliation, a mother never sees her wayward child again. He is damned forever.</div></div></div>
+        <div class="question"><div class="num">06</div><div class="body"><div class="q">Why is lazy Uncle Bob punished like Hitler?</div><div class="a">ECT and annihilationism have to argue Uncle Bob receives the same fate as Hitler.</div></div></div>
+      </div>
+      <p class="closing-line">ECT offers no good answer to any of these questions. Indeed, these questions arise <em>because</em> of our collective adherence to the doctrine.</p>
+    </section>
+
+    <div class="divider"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+    <!-- ========== SOCIAL ========== -->
+    <section id="social">
+      <div class="section-header">
+        <div class="section-eyebrow">What we believe shapes what we become</div>
+        <h2 class="section-title">Social Consequences of ECT</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <blockquote class="bq">
+        <p class="quote">"If your view of God is twisted, then the more devout you are, the worse off you are."</p>
+        <div class="attribution">— Dallas Willard</div>
+      </blockquote>
+      <p class="prose">We learn the character of God through his revealed word, and we are made in his image. People become like the God they believe. Beware how you see God — it can change who you are.</p>
+
+      <div class="collapsible">
+        <button class="collapsible-btn">
+          <span class="title">Andrea Yates</span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="collapsible-content">
+          <p class="prose">Many are unaware that Andrea Yates, who killed her five young children in a bathtub in 2001, did so because of her belief in eternal conscious torment. Her primary concern was that she would be unable to lead her children to saving faith. Because she believed in the "age of accountability," she reasoned that killing them <em>before</em> that age would save them from hell forever. Sadly, other than calling her psychotic, if the assumptions of ECT are true, her act was a perfectly reasonable one.</p>
+        </div>
+      </div>
+
+      <div class="collapsible">
+        <button class="collapsible-btn">
+          <span class="title">American Retributive Justice</span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="collapsible-content">
+          <p class="prose">American evangelicalism leans heavily toward ECT, and it begs the question: why does justice in the United States lean so heavily on retributive vs. restorative justice? A full examination is out of scope here, but it does tend to look like an artifact of our theological assumptions.</p>
+        </div>
+      </div>
+    </section>
+
+    <div class="divider"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+    <!-- ========== SCRIPTURE FOR ========== -->
+    <section id="for">
+      <div class="section-header">
+        <div class="section-eyebrow">Justification, then sanctification</div>
+        <h2 class="section-title">Biblical Passages Supporting It</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <p class="prose">No theology can be defended by proof-texting, and that's not the intention here. The aim is to show that on first pass, the Bible has sufficient evidence to support the doctrine of eventual reconciliation. The passages are separated into justification and sanctification.</p>
+
+      <h3 class="subhead" id="all-passages">The "All" Passages <span class="light">(Justification)</span></h3>
+      <p style="font-size: 0.75rem; color: #78716c; margin-top: -0.5rem; margin-bottom: 1rem;">Verses marked <span class="key-dot"></span> are the strongest exegetical anchors.</p>
+      <div class="verselist" id="justification-list"></div>
+
+      <h3 class="subhead" id="refining-passages">The Refining Passages <span class="light">(Sanctification)</span></h3>
+      <p class="prose">My view holds that post-mortem refinement is achieved through the overwhelming fire of God's glory.</p>
+      <div class="verselist" id="refining-list"></div>
+    </section>
+
+    <div class="divider"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+    <!-- ========== RESPONSES ========== -->
+    <section id="against">
+      <div class="section-header">
+        <div class="section-eyebrow">The texts most often cited against universalism</div>
+        <h2 class="section-title">Responding to Pro-ECT Verses</h2>
+        <div class="section-rule"></div>
+      </div>
+
+      <h3 class="subhead">Objection: "Universalist tendencies are selfish and sinful"</h3>
+      <p class="prose">This depends on motive. Some argue for universalism because they want license to sin — but they misunderstand Christian Universalism, which requires reparations for sin even in the afterlife. They likely hold to a pluralistic universalism instead.</p>
+      <p class="prose">For many others, Christian Universalism is not about getting away with sin but about the hope of being with their loved ones forever. It isn't selfish to want your friends to experience good things.</p>
+
+      <div class="callout">
+        <div class="callout-title">The trilemma</div>
+        <p>These three claims cannot all be true:</p>
+        <ol>
+          <li>God is good and wants everyone reconciled to him.</li>
+          <li>God has the power to achieve any goal he desires.</li>
+          <li>Not everybody will be reconciled.</li>
+        </ol>
+        <p>ECT proponents say we should accept the contradiction as a mystery. Perhaps. But if Scripture <em>can</em> be read in a way that avoids the dilemma — why wouldn't we?</p>
+      </div>
+
+      <h3 class="subhead">Objection: "It denies free will"</h3>
+      <p class="prose">If a child makes a poor decision, a good parent doesn't shrug and "honor his free will." A good parent saves the child and aims to correct him. We overindex on free will. God is everyone's father — even of those who deny it — and he will meet ignorance with knowledge and lead all to redemption eventually.</p>
+
+      <div class="divider light"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+      <h3 class="passage">Matthew 25:41, 46</h3>
+      <div class="verseblock"><p>"Depart from me, you who are cursed, into the eternal fire prepared for the devil and his angels... Then they will go away to eternal punishment, but the righteous to eternal life."</p></div>
+      <p class="prose">Matthew 25:46 is arguably the strongest argument for ECT. The whole weight rests on two Greek words.</p>
+
+      <div class="collapsible">
+        <button class="collapsible-btn">
+          <span class="title"><span class="greek">αἰώνιος</span> — "eternal" or "of the age"?</span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="collapsible-content">
+          <p class="prose">For ECT adherents, <span class="greek">αἰώνιος</span> is synonymous with everlasting. But scripturally this isn't always the case. The actual meaning is "of the age," and context decides whether it lasts the entire age or is something of an age that eventually ends.</p>
+          <div class="gex"><div class="ref">Romans 16:25-27</div><p class="text">"The mystery hidden for long (αἰώνιος) ages past, but now revealed."</p><div class="note">Clearly bounded — the αἰώνιος ages ended.</div></div>
+          <div class="gex"><div class="ref">2 Timothy 1:9</div><p class="text">"Grace given us in Christ Jesus before the beginning of time (πρὸ χρόνων αἰωνίων)."</p><div class="note">A starting point — not endless from eternity past.</div></div>
+          <div class="gex"><div class="ref">Jude 7</div><p class="text">"Sodom and Gomorrah... serve as an example of those who suffer the punishment of eternal (αἰώνιος) fire."</p><div class="note">The fire isn't still burning.</div></div>
+          <div class="gex"><div class="ref">Genesis 49:26 (LXX)</div><p class="text">"Your father's blessings are greater than the blessings of the ancient (αἰώνιος) mountains."</p><div class="note">Used spatially/qualitatively, not durationally.</div></div>
+          <div class="gex"><div class="ref">Numbers 25:13 (LXX)</div><p class="text">"A covenant of a lasting (αἰώνιος) priesthood."</p></div>
+          <div class="gex"><div class="ref">Habakkuk 3:6 (LXX)</div><p class="text">"The ancient (αἰώνιος) mountains crumbled."</p><div class="note">They crumbled — so αἰώνιος clearly isn't 'endless' here.</div></div>
+          <p class="prose">In Scripture, <span class="greek">αἰώνιος</span> does not always mean everlasting. It can mean "of the age." Linguistically, it's a toss-up.</p>
+        </div>
+      </div>
+
+      <div class="collapsible">
+        <button class="collapsible-btn">
+          <span class="title"><span class="greek">κόλασις</span> — retributive or restorative?</span>
+          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="collapsible-content">
+          <p class="prose">In Aristotle's <em>Rhetoric</em> 1.10.17, he explicitly distinguishes <span class="greek">τιμωρία</span> from <span class="greek">κόλασις</span>: the former is for the sake of the one inflicting it; the latter for the sake of the one suffering it. <span class="greek">κόλασις</span> is corrective.</p>
+          <p class="prose">A caveat: Aristotle wrote ~350 years before Jesus, and the word likely carried more connotations by the New Testament era. ECT proponents push this to say the corrective sense is no longer the meaning — but the classical definition remains a valid one, even if additional senses developed.</p>
+          <p class="prose">So the word can mean either restorative or retributive justice.</p>
+        </div>
+      </div>
+
+      <h3 class="subhead">The four-cell matrix</h3>
+      <div class="matrix">
+        <table>
+          <thead>
+            <tr>
+              <th></th>
+              <th><span class="greek" style="color:inherit;">κόλασις</span> = Retributive</th>
+              <th><span class="greek" style="color:inherit;">κόλασις</span> = Restorative</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="greek">αἰώνιος</span> = Everlasting</td>
+              <td>ECT</td>
+              <td class="nonsense">Nonsensical*</td>
+            </tr>
+            <tr>
+              <td><span class="greek">αἰώνιος</span> = Of the Age</td>
+              <td>Leans Annihilationism</td>
+              <td class="winner">Christian Universalism</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="matrix-note">*Could root in restorative justice flowing eternally from God, but is awkward enough to be unlikely.</div>
+      <p class="prose">By itself, Matthew 25:46 is roughly 50/50 between ECT and Christian Universalism — with annihilationism uphill. Read against the larger witness of Scripture, restorative justice <em>of the age</em> is the most coherent reading: when God separates the sheep from the goats, some go on to eternal life, and some to a punishment <em>in that age</em>.</p>
+
+      <div class="divider light"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+      <h3 class="passage">Eternal Fire — Matthew 18:8, Mark 9:43-48</h3>
+      <div class="verseblock"><p>"It is better for you to enter life maimed or crippled than to have two hands or two feet and be thrown into eternal fire... where the worms that eat them do not die, and the fire is not quenched."</p></div>
+      <p class="prose">Both verses are intentionally hyperbolic and so are unreliable witnesses to the durative nature of the fire. Moreover, it is the <em>fire</em> that is unquenchable, not the individual's existence in it. The rest is reader's inference.</p>
+
+      <div class="divider light"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+      <h3 class="passage">Rich Man and Lazarus — Luke 16:23-24</h3>
+      <div class="verseblock"><p>"In Hades, where he was in torment, he looked up and saw Abraham far away, with Lazarus by his side. So he called to him, 'Father Abraham, have pity on me and send Lazarus to dip the tip of his finger in water and cool my tongue, because I am in agony in this fire.'"</p></div>
+      <p class="prose">A bizarre passage for several reasons — it's the only parable with a named individual, and it has close associations with an Egyptian story circulating at the time. Using this to ground a doctrine of the afterlife is a literary misuse. The Egyptian source held a similar view of the afterlife, and the point of the passage is the Pharisees' resistance to believing in Christ — that they wouldn't believe even if someone returned from the dead. Not a strong support for ECT once the literary considerations are weighed.</p>
+
+      <div class="divider light"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+      <h3 class="passage">2 Thessalonians 1:8-9</h3>
+      <div class="verseblock"><p>"...in blazing fire... He will punish those who do not know God and do not obey the gospel of our Lord Jesus. They will be punished with everlasting destruction and shut out from the presence of the Lord and from the glory of his might."</p></div>
+      <p class="prose">This is one of those verses where translator bias bleeds into the text. Because traditional theology assumes a holy God cannot be in the presence of sinners, this is rendered as punishment <em>away from</em> God.</p>
+      <div class="callout">
+        <div class="callout-title">The Greek ἀπό problem</div>
+        <p>This is the only place in most English New Testaments where <span class="greek">ἀπό</span> is translated "away from." Everywhere else, it means "emanating from," unless a verb clarifies otherwise (e.g., <em>hiding</em> from). There is no such clarifying verb in the original Greek of 2 Thess 1:9.</p>
+        <p>The "emanating from" reading would render the verse: <em>destruction emanating from the presence of the Lord</em> — which is consistent with refining fire.</p>
+        <p>It also directly contradicts Revelation 14:9-11, where the worshippers of the beast are tormented <em>in the presence of</em> the holy angels and the Lamb.</p>
+      </div>
+
+      <div class="divider light"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+      <h3 class="passage">Revelation 14:9-11</h3>
+      <div class="verseblock"><p>"...they will be tormented with burning sulfur in the presence of the holy angels and of the Lamb. And the smoke of their torment will rise for ever and ever. There will be no rest day or night for those who worship the beast and its image..."</p></div>
+      <p class="prose">The smoke rising forever is a literary callback to the total destruction of cities in the Old Testament. Sodom's smoke is said to go up forever — but it isn't rising today, and it wasn't rising when Jude wrote his book. To take this literally is to abuse the genre.</p>
+
+      <div class="divider light"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+      <h3 class="passage">Revelation 20 — The Lake of Fire</h3>
+      <div class="verseblock"><p>"And the devil, who deceived them, was thrown into the lake of burning sulfur, where the beast and the false prophet had been thrown. They will be tormented day and night for ever and ever... Then death and Hades were thrown into the lake of fire. The lake of fire is the second death. Anyone whose name was not found written in the book of life was thrown into the lake of fire."</p></div>
+      <p class="prose">I won't spend much time on these — it's not humans being punished in Rev 20:10. It's the devil, the beast, and the false prophet. Even death and Hades are thrown in. The eternal torment language applies to these figures, not to humanity.</p>
+    </section>
+
+    <div class="divider"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
+
+    <div class="epigraph">
+      <div class="text ornament" style="font-size: 1.125rem;">that all should come to repentance</div>
+      <div class="ref">2 Peter 3:9</div>
+    </div>
+  </div>
+</main>
+
+<button class="totop" id="totop" aria-label="Back to top">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+</button>
+
+<script>
+// ========== VERSE DATA & LIST BUILDING ==========
+var justificationVerses = [
+  { ref: '2 Samuel 14:14', text: 'We must all die; we are like water spilled on the ground, which cannot be recovered. But that is not what God desires; rather, he devises ways so that a banished person does not remain banished from him.' },
+  { ref: 'Ezekiel 33:11', text: 'Say to them, "As surely as I live, declares the Sovereign Lord, I take no pleasure in the death of the wicked, but rather that they turn from their ways and live."' },
+  { ref: 'Lamentations 3:31-33', text: 'For no one is cast off by the Lord forever. Though he brings grief, he will show compassion, so great is his unfailing love. For he does not willingly bring affliction or grief to anyone.' },
+  { ref: 'Luke 23:34', text: 'Jesus said, "Father, forgive them, for they do not know what they are doing."' },
+  { ref: 'John 12:32', text: '"And I, when I am lifted up from the earth, will draw all people to myself."' },
+  { ref: 'Acts 3:21', text: 'Heaven must receive him until the time comes for God to restore everything, as he promised long ago through his holy prophets.', note: 'Gk: ἀποκατάστασις πάντων ("restoration of all things")' },
+  { ref: 'Romans 5:18', text: 'Consequently, just as one trespass resulted in condemnation for all people, so also one righteous act resulted in justification and life for all people.', key: true },
+  { ref: 'Romans 8:38-39', text: 'For I am convinced that neither death nor life, neither angels nor demons, neither the present nor the future, nor any powers, neither height nor depth, nor anything else in all creation, will be able to separate us from the love of God that is in Christ Jesus our Lord.' },
+  { ref: 'Romans 11:32', text: 'For God has bound everyone over to disobedience so that he may have mercy on them all.' },
+  { ref: '1 Corinthians 15:22', text: 'For as in Adam all die, so in Christ all will be made alive.' },
+  { ref: '1 Corinthians 15:25-28', text: 'For he must reign until he has put all his enemies under his feet. The last enemy to be destroyed is death... When he has done this, then the Son himself will be made subject to him who put everything under him, so that God may be all in all.' },
+  { ref: '2 Corinthians 5:14-15, 19', text: "For Christ's love compels us, because we are convinced that one died for all, and therefore all died... that God was reconciling the world to himself in Christ, not counting people's sins against them." },
+  { ref: '1 Timothy 2:3-4', text: 'This is good, and pleases God our Savior, who wants all people to be saved and to come to a knowledge of the truth.', key: true },
+  { ref: '1 Timothy 4:10', text: 'That is why we labor and strive, because we have put our hope in the living God, who is the Savior of all people, and especially of those who believe.' },
+  { ref: 'Colossians 1:19-20', text: 'For God was pleased to have all his fullness dwell in him, and through him to reconcile to himself all things, whether things on earth or things in heaven, by making peace through his blood, shed on the cross.' },
+  { ref: 'Philippians 2:9-11', text: 'Therefore God exalted him to the highest place and gave him the name that is above every name, that at the name of Jesus every knee should bow, in heaven and on earth and under the earth, and every tongue acknowledge that Jesus Christ is Lord, to the glory of God the Father.' },
+  { ref: 'Titus 2:11', text: 'For the grace of God has appeared that offers salvation to all people.', key: true },
+  { ref: 'Hebrews 2:9', text: 'But we do see Jesus, who was made lower than the angels for a little while, now crowned with glory and honor because he suffered death, so that by the grace of God he might taste death for everyone.' },
+  { ref: '1 Peter 3:18-19', text: 'For Christ also suffered once for sins, the righteous for the unrighteous, to bring you to God. He was put to death in the body but made alive in the Spirit. After being made alive, he went and made proclamation to the imprisoned spirits.' },
+  { ref: '1 Peter 4:6', text: 'For this is the reason the gospel was preached even to those who are now dead, so that they might be judged according to human standards in regard to the body, but live according to God in regard to the spirit.', key: true },
+  { ref: '2 Peter 3:9', text: 'The Lord is not slow in keeping his promise, as some understand slowness. Instead he is patient with you, not wanting anyone to perish, but everyone to come to repentance.' },
+  { ref: '1 John 2:2', text: 'He is the atoning sacrifice for our sins, and not only for ours but also for the sins of the whole world.', key: true },
+  { ref: 'Revelation 21:4-5', text: '"He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain, for the old order of things has passed away." He who was seated on the throne said, "I am making all things new!"' }
+];
+
+var refiningVerses = [
+  { ref: 'Isaiah 33:14-16', text: 'The sinners in Zion are terrified; trembling grips the godless: "Who of us can dwell with the consuming fire? Who of us can dwell with everlasting burning?" Those who walk righteously and speak what is right... they are the ones who will dwell on the heights.' },
+  { ref: 'Isaiah 48:10', text: 'See, I have refined you, though not as silver; I have tested you in the furnace of affliction.' },
+  { ref: 'Malachi 3:2-3', text: "But who can endure the day of his coming? Who can stand when he appears? For he will be like a refiner's fire or a launderer's soap. He will sit as a refiner and purifier of silver; he will purify the Levites and refine them like gold and silver." },
+  { ref: 'Mark 9:49', text: 'Everyone will be salted with fire.' },
+  { ref: 'Matthew 5:25-26', text: 'Settle matters quickly with your adversary who is taking you to court... Truly I tell you, you will not get out until you have paid the last penny.', note: 'Gk: κοδράντης — the smallest Roman coin' },
+  { ref: '1 Corinthians 3:13-15', text: "Their work will be shown for what it is, because the Day will bring it to light. It will be revealed with fire, and the fire will test the quality of each person's work... If it is burned up, the builder will suffer loss but yet will be saved—even though only as one escaping through the flames." },
+  { ref: 'Hebrews 12:28-29', text: 'Therefore, since we are receiving a kingdom that cannot be shaken, let us be thankful, and so worship God acceptably with reverence and awe, for our "God is a consuming fire."' },
+  { ref: '1 Peter 1:7', text: 'These have come so that the proven genuineness of your faith—of greater worth than gold, which perishes even though refined by fire—may result in praise, glory and honor when Jesus Christ is revealed.' }
+];
+
+function buildVerseList(containerId, verses) {
+  var container = document.getElementById(containerId);
+  if (!container) return;
+  for (var i = 0; i < verses.length; i++) {
+    var v = verses[i];
+    var div = document.createElement('div');
+    div.className = 'vitem' + (v.key ? ' key' : '');
+    var btn = document.createElement('button');
+    btn.className = 'vitem-btn';
+    btn.innerHTML =
+      '<span class="ref-line">' +
+      (v.key ? '<span class="key-dot"></span>' : '') +
+      '<span class="ref">' + v.ref + '</span>' +
+      '</span>' +
+      '<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
+    var content = document.createElement('div');
+    content.className = 'vitem-content';
+    var p = document.createElement('p');
+    p.className = 'text';
+    p.textContent = '"' + v.text + '"';
+    content.appendChild(p);
+    if (v.note) {
+      var note = document.createElement('div');
+      note.className = 'note';
+      note.textContent = v.note;
+      content.appendChild(note);
+    }
+    div.appendChild(btn);
+    div.appendChild(content);
+    container.appendChild(div);
+    (function(item) {
+      btn.addEventListener('click', function() {
+        item.classList.toggle('open');
+      });
+    })(div);
+  }
+}
+
+// ========== INTERACTIONS ==========
+document.addEventListener('DOMContentLoaded', function() {
+  buildVerseList('justification-list', justificationVerses);
+  buildVerseList('refining-list', refiningVerses);
+
+  // Collapsibles
+  var collapsibles = document.querySelectorAll('.collapsible-btn');
+  for (var i = 0; i < collapsibles.length; i++) {
+    collapsibles[i].addEventListener('click', function() {
+      this.parentElement.classList.toggle('open');
+    });
+  }
+
+  // Navigation (tabs and slidemenu)
+  function scrollToSection(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    var headerH = document.querySelector('header').offsetHeight;
+    var top = el.getBoundingClientRect().top + window.pageYOffset - headerH - 16;
+    window.scrollTo({ top: top, behavior: 'smooth' });
+  }
+  var navButtons = document.querySelectorAll('[data-target]');
+  for (var j = 0; j < navButtons.length; j++) {
+    navButtons[j].addEventListener('click', function() {
+      scrollToSection(this.getAttribute('data-target'));
+      closeMenu();
+    });
+  }
+
+  // Slide menu
+  var slidemenu = document.getElementById('slidemenu');
+  var backdrop = document.getElementById('backdrop');
+  function openMenu() {
+    slidemenu.classList.add('open');
+    backdrop.classList.add('open');
+  }
+  function closeMenu() {
+    slidemenu.classList.remove('open');
+    backdrop.classList.remove('open');
+  }
+  document.getElementById('menuOpenBtn').addEventListener('click', openMenu);
+  document.getElementById('menuCloseBtn').addEventListener('click', closeMenu);
+  backdrop.addEventListener('click', closeMenu);
+
+  // Scroll-related: active tab + back-to-top
+  var totop = document.getElementById('totop');
+  var sections = ['overview', 'terminology', 'philosophical', 'social', 'for', 'against'];
+  var tabs = document.querySelectorAll('.tab');
+
+  function onScroll() {
+    if (window.pageYOffset > 400) totop.classList.add('show');
+    else totop.classList.remove('show');
+
+    var headerH = document.querySelector('header').offsetHeight;
+    var activeId = sections[0];
+    for (var k = 0; k < sections.length; k++) {
+      var el = document.getElementById(sections[k]);
+      if (!el) continue;
+      var rect = el.getBoundingClientRect();
+      if (rect.top <= headerH + 40) activeId = sections[k];
+    }
+    for (var m = 0; m < tabs.length; m++) {
+      if (tabs[m].getAttribute('data-target') === activeId) tabs[m].classList.add('active');
+      else tabs[m].classList.remove('active');
+    }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  totop.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
