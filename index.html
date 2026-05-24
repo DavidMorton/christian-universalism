@@ -37,12 +37,8 @@
     padding-top: calc(env(safe-area-inset-top) + 0.5rem);
   }
   .header-top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 1rem;
+    padding: 0.75rem 1rem 0.25rem;
   }
-  .header-title { flex: 1; min-width: 0; }
   .header-title h1 {
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.25rem;
@@ -50,9 +46,7 @@
     margin: 0;
     letter-spacing: -0.01em;
     color: #fafaf9;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    line-height: 1.15;
   }
   .header-title .subtitle {
     font-size: 0.625rem;
@@ -61,19 +55,6 @@
     color: #a8a29e;
     margin-top: 0.125rem;
   }
-  .menu-btn {
-    background: transparent;
-    border: none;
-    color: #f5f5f4;
-    padding: 0.5rem;
-    border-radius: 0.375rem;
-    cursor: pointer;
-    margin-left: 0.75rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .menu-btn:hover { background: #2a3548; }
 
   .tabs {
     display: flex;
@@ -84,6 +65,7 @@
     background: #1a2332;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    margin-top: 0.5rem;
   }
   .tabs::-webkit-scrollbar { display: none; }
   .tab {
@@ -106,85 +88,6 @@
   .tab:hover { color: #e7e5e4; }
   .tab.active { color: #d4af7a; background: #2a3548; }
   .tab svg { width: 12px; height: 12px; }
-
-  /* ========== SLIDE MENU ========== */
-  .backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(4px);
-    z-index: 40;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s;
-  }
-  .backdrop.open { opacity: 1; pointer-events: auto; }
-
-  .slidemenu {
-    position: fixed;
-    top: 0; right: 0; bottom: 0;
-    width: 20rem;
-    max-width: 85vw;
-    background: #1a2332;
-    color: #f5f5f4;
-    z-index: 50;
-    transform: translateX(100%);
-    transition: transform 0.3s;
-    box-shadow: -8px 0 24px rgba(0,0,0,0.3);
-    display: flex;
-    flex-direction: column;
-  }
-  .slidemenu.open { transform: translateX(0); }
-  .slidemenu-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1.25rem;
-    border-bottom: 1px solid #2a3548;
-    padding-top: calc(1.25rem + env(safe-area-inset-top));
-  }
-  .slidemenu-header p {
-    margin: 0;
-    font-size: 0.625rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #a8a29e;
-  }
-  .slidemenu-list {
-    flex: 1;
-    overflow-y: auto;
-    padding: 0.75rem;
-  }
-  .slidemenu-item {
-    display: block;
-    width: 100%;
-    text-align: left;
-    padding: 0.75rem 1rem;
-    border-radius: 0.375rem;
-    background: transparent;
-    border: none;
-    color: inherit;
-    cursor: pointer;
-    margin-bottom: 0.25rem;
-    transition: background 0.15s;
-  }
-  .slidemenu-item:hover { background: #2a3548; }
-  .slidemenu-item.sub {
-    margin-left: 1rem;
-    border-left: 2px solid rgba(212, 175, 122, 0.3);
-    padding-left: 1rem;
-    border-radius: 0;
-  }
-  .slidemenu-item .item-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1rem;
-    color: #f5f5f4;
-  }
-  .slidemenu-item .item-sub {
-    font-size: 0.75rem;
-    color: #a8a29e;
-    margin-top: 0.125rem;
-  }
 
   /* ========== MAIN CONTENT ========== */
   main {
@@ -352,111 +255,35 @@
   }
   .callout ol li { margin-bottom: 0.25rem; }
 
-  /* ========== COLLAPSIBLES ========== */
-  .collapsible {
-    margin: 0.75rem 0;
-    border: 1px solid #e7e5e4;
-    border-radius: 0.375rem;
-    overflow: hidden;
-    background: white;
-  }
-  .collapsible-btn {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.875rem 1rem;
-    text-align: left;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: background 0.15s;
-    color: inherit;
-  }
-  .collapsible-btn:hover { background: #fafaf9; }
-  .collapsible-btn .title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.125rem;
-    font-weight: 500;
-    color: #292524;
-    padding-right: 1rem;
-  }
-  .collapsible-btn .chevron {
-    color: #78716c;
-    flex-shrink: 0;
-    transition: transform 0.2s;
-  }
-  .collapsible.open .chevron { transform: rotate(90deg); }
-  .collapsible-content {
-    display: none;
-    padding: 0.25rem 1rem 1rem 1rem;
-    border-top: 1px solid #f5f5f4;
-  }
-  .collapsible.open .collapsible-content { display: block; animation: fadeIn 0.3s; }
-
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* ========== GRIDS ========== */
-  .objgrid {
+  /* ========== BOX GRIDS ========== */
+  .boxgrid {
     display: grid;
     gap: 0.625rem;
     margin: 1rem 0;
   }
-  .objgrid .item {
-    padding: 0.875rem;
+  .boxgrid .item {
+    padding: 0.875rem 1rem;
     background: white;
     border: 1px solid #e7e5e4;
     border-radius: 0.375rem;
   }
-  .objgrid .item .t {
+  .boxgrid .item .t {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1rem;
+    font-size: 1.0625rem;
     font-weight: 600;
     color: #292524;
     margin: 0 0 0.25rem 0;
+    line-height: 1.25;
   }
-  .objgrid .item .d {
+  .boxgrid .item .d {
     font-family: 'Cardo', Georgia, serif;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     color: #57534e;
     margin: 0;
     line-height: 1.6;
   }
 
-  .questions { margin: 1rem 0; }
-  .question {
-    display: flex;
-    gap: 0.75rem;
-    margin-bottom: 0.75rem;
-  }
-  .question .num {
-    flex-shrink: 0;
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1.5rem;
-    color: #a8956c;
-    line-height: 1;
-  }
-  .question .body { flex: 1; }
-  .question .q {
-    font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #292524;
-    margin: 0 0 0.25rem 0;
-    line-height: 1.3;
-  }
-  .question .a {
-    font-family: 'Cardo', Georgia, serif;
-    font-size: 0.875rem;
-    color: #57534e;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  /* ========== VERSE LIST ========== */
+  /* ========== VERSE LIST (always expanded) ========== */
   .key-dot {
     display: inline-block;
     width: 0.5rem;
@@ -464,62 +291,33 @@
     border-radius: 50%;
     background: #a8956c;
     vertical-align: middle;
-    margin: 0 0.125rem;
+    margin: 0 0.375rem 0 0;
+    flex-shrink: 0;
   }
   .verselist { margin: 0.75rem 0; }
   .vitem {
     border: 1px solid #e7e5e4;
     border-radius: 0.375rem;
-    overflow: hidden;
     background: white;
-    margin-bottom: 0.375rem;
-    transition: all 0.15s;
+    margin-bottom: 0.625rem;
+    padding: 0.875rem 1rem;
   }
   .vitem.key {
     border-color: rgba(168, 149, 108, 0.4);
     background: rgba(250, 246, 237, 0.4);
   }
-  .vitem-btn {
-    width: 100%;
+  .vitem .ref-line {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 0.625rem 0.875rem;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    text-align: left;
-    color: inherit;
+    margin-bottom: 0.5rem;
   }
-  .vitem-btn:hover { background: #fafaf9; }
-  .vitem-btn .ref-line {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    flex: 1;
-    min-width: 0;
-  }
-  .vitem-btn .ref {
+  .vitem .ref {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 1rem;
+    font-size: 1.0625rem;
     font-weight: 600;
     color: #292524;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
-  .vitem-btn .chevron {
-    color: #a8a29e;
-    flex-shrink: 0;
-    transition: transform 0.2s;
-  }
-  .vitem.open .vitem-btn .chevron { transform: rotate(90deg); }
-  .vitem-content {
-    display: none;
-    padding: 0.25rem 0.875rem 0.875rem;
-  }
-  .vitem.open .vitem-content { display: block; animation: fadeIn 0.3s; }
-  .vitem-content .text {
+  .vitem .text {
     font-family: 'Cardo', Georgia, serif;
     font-size: 0.9375rem;
     line-height: 1.7;
@@ -527,7 +325,7 @@
     font-style: italic;
     margin: 0;
   }
-  .vitem-content .note {
+  .vitem .note {
     font-size: 0.75rem;
     color: #8a7548;
     font-style: italic;
@@ -542,6 +340,7 @@
     color: #292524;
     margin: 2rem 0 0.5rem;
     line-height: 1.2;
+    scroll-margin-top: 8rem;
   }
   .gex {
     margin: 0.75rem 0;
@@ -620,7 +419,7 @@
     color: #78716c;
     text-align: center;
     margin: 1.5rem 0;
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
   }
 
   /* ========== BACK TO TOP ========== */
@@ -651,21 +450,13 @@
       color: #d6d3d1;
     }
 
-    /* Header & menu — keep similar but slightly adjusted */
     header {
       background: #0f1419;
       border-bottom-color: #2a3548;
     }
-    .header-top, .tabs { background: #0f1419 !important; }
-    .tabs { border-top-color: #1f2937; }
+    .tabs { background: #0f1419 !important; border-top-color: #1f2937; }
     .tab.active { background: #1f2937; color: #e4c891; }
-    .menu-btn:hover { background: #1f2937; }
 
-    .slidemenu { background: #0f1419; }
-    .slidemenu-header { background: #0f1419; border-bottom-color: #2a3548; }
-    .slidemenu-item:hover { background: #1f2937; }
-
-    /* Epigraph & section headers — gold pops more in dark */
     .epigraph .text { color: #a8a29e; }
     .epigraph .ref { color: #78716c; }
     .section-eyebrow { color: #c9a87a; }
@@ -675,28 +466,23 @@
     h3.subhead .light { color: #a8a29e; }
     h3.passage { color: #f5f5f4; }
 
-    /* Body text — much brighter for readability */
     .prose { color: #d6d3d1; }
     .verse-inline { color: #a8a29e; }
     .closing-line { color: #a8a29e; }
 
-    /* Dividers */
     .divider .line { background: #44403c; }
     .divider .star { color: #c9a87a; }
 
-    /* Blockquote */
     blockquote.bq { border-left-color: #c9a87a; }
     blockquote.bq .quote { color: #e7e5e4; }
     blockquote.bq .attribution { color: #a8a29e; }
 
-    /* Verse blocks — dark with light text */
     .verseblock {
       background: #1c1f26;
       border-left-color: #c9a87a;
     }
     .verseblock p { color: #e7e5e4; }
 
-    /* Callouts — warm dark, not too jarring */
     .callout {
       background: #1f1a14;
       border-color: #3d3424;
@@ -704,33 +490,15 @@
     .callout .callout-title { color: #d4af7a; }
     .callout, .callout p, .callout ol { color: #d6d3d1; }
 
-    /* Collapsibles */
-    .collapsible {
-      background: #1c1f26;
-      border-color: #2a3548;
-    }
-    .collapsible-btn:hover { background: #232730; }
-    .collapsible-btn .title { color: #f5f5f4; }
-    .collapsible-btn .chevron { color: #a8a29e; }
-    .collapsible-content { border-top-color: #2a3548; }
-
-    /* Greek terms — soft cream to stand out */
     .greek { color: #f5e6c8; }
 
-    /* Objection grid */
-    .objgrid .item {
+    .boxgrid .item {
       background: #1c1f26;
       border-color: #2a3548;
     }
-    .objgrid .item .t { color: #f5f5f4; }
-    .objgrid .item .d { color: #c4c0bc; }
+    .boxgrid .item .t { color: #f5f5f4; }
+    .boxgrid .item .d { color: #c4c0bc; }
 
-    /* Question list */
-    .question .num { color: #c9a87a; }
-    .question .q { color: #f5f5f4; }
-    .question .a { color: #c4c0bc; }
-
-    /* Verse list */
     .vitem {
       background: #1c1f26;
       border-color: #2a3548;
@@ -739,19 +507,15 @@
       background: #221d15;
       border-color: rgba(212, 175, 122, 0.4);
     }
-    .vitem-btn:hover { background: #232730; }
-    .vitem-btn .ref { color: #f5f5f4; }
-    .vitem-btn .chevron { color: #a8a29e; }
-    .vitem-content .text { color: #d6d3d1; }
-    .vitem-content .note { color: #d4af7a; }
+    .vitem .ref { color: #f5f5f4; }
+    .vitem .text { color: #d6d3d1; }
+    .vitem .note { color: #d4af7a; }
 
-    /* Greek examples */
     .gex { border-left-color: #44403c; }
     .gex .ref { color: #a8a29e; }
     .gex .text { color: #d6d3d1; }
     .gex .note { color: #d4af7a; }
 
-    /* Matrix */
     .matrix { border-color: #2a3548; }
     .matrix thead tr { background: #0f1419; }
     .matrix td {
@@ -767,10 +531,8 @@
     .matrix .winner { color: #e4c891; }
     .matrix-note { color: #a8a29e; }
 
-    /* Key dot — slightly brighter */
     .key-dot { background: #c9a87a; }
 
-    /* Back to top */
     .totop { background: #1f2937; }
     .totop:hover { background: #2a3548; }
   }
@@ -780,48 +542,22 @@
 
 <header>
   <div class="header-inner">
-  <div class="header-top">
-    <div class="header-title">
-      <h1>On Christian Universalism</h1>
-      <div class="subtitle">A Personal Theological Outline</div>
+    <div class="header-top">
+      <div class="header-title">
+        <h1>On Christian Universalism</h1>
+        <div class="subtitle">A Personal Theological Outline</div>
+      </div>
     </div>
-    <button class="menu-btn" id="menuOpenBtn" aria-label="Menu">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-    </button>
-  </div>
-  <div class="tabs" id="tabs">
-    <button class="tab active" data-target="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>What It Is</button>
-    <button class="tab" data-target="terminology"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M22 17H5a2 2 0 0 0 0 4h13a2 2 0 0 0 2-2v-3z"/><path d="M4 3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2"/></svg>Terminology</button>
-    <button class="tab" data-target="philosophical"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Philosophical</button>
-    <button class="tab" data-target="social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 5L18 9.5 13.5 11 12 16l-1.5-5L6 9.5 10.5 8z"/></svg>Social Impact</button>
-    <button class="tab" data-target="for"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Scripture For</button>
-    <button class="tab" data-target="against"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Responses</button>
-  </div>
+    <div class="tabs" id="tabs">
+      <button class="tab active" data-target="overview"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>What It Is</button>
+      <button class="tab" data-target="terminology"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17V5a2 2 0 0 0-2-2H4"/><path d="M22 17H5a2 2 0 0 0 0 4h13a2 2 0 0 0 2-2v-3z"/><path d="M4 3a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2"/></svg>Terminology</button>
+      <button class="tab" data-target="philosophical"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>Philosophical</button>
+      <button class="tab" data-target="social"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l1.5 5L18 9.5 13.5 11 12 16l-1.5-5L6 9.5 10.5 8z"/></svg>Social Impact</button>
+      <button class="tab" data-target="for"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Scripture For</button>
+      <button class="tab" data-target="against"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Responses</button>
+    </div>
   </div>
 </header>
-
-<div class="backdrop" id="backdrop"></div>
-<nav class="slidemenu" id="slidemenu">
-  <div class="slidemenu-header">
-    <p>Quick Navigation</p>
-    <button class="menu-btn" id="menuCloseBtn" aria-label="Close">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-  <div class="slidemenu-list">
-    <button class="slidemenu-item" data-target="overview"><div class="item-title">What It Is</div><div class="item-sub">Justification, sanctification, evangelism</div></button>
-    <button class="slidemenu-item" data-target="terminology"><div class="item-title">Notes on Terminology</div><div class="item-sub">"Death," tradition, Trench, αἰώνιος</div></button>
-    <button class="slidemenu-item" data-target="philosophical"><div class="item-title">Philosophical Impetus</div><div class="item-sub">Mercy, proportion, free will</div></button>
-    <button class="slidemenu-item sub" data-target="questions"><div class="item-title">Haunting Questions</div><div class="item-sub">Babies, the unevangelized, accidents of timing</div></button>
-    <button class="slidemenu-item sub" data-target="emotional-reasoning"><div class="item-title">On "Emotional" Reasoning</div><div class="item-sub">Edwards, Piper, Calvin, special pleading</div></button>
-    <button class="slidemenu-item sub" data-target="assurance"><div class="item-title">ECT vs. Assurance</div><div class="item-sub">The doctrine eats its own assurance</div></button>
-    <button class="slidemenu-item" data-target="social"><div class="item-title">Social Consequences</div><div class="item-sub">Andrea Yates, retributive justice</div></button>
-    <button class="slidemenu-item" data-target="for"><div class="item-title">Scripture For</div><div class="item-sub">The "all" passages + refining fire</div></button>
-    <button class="slidemenu-item sub" data-target="all-passages"><div class="item-title">The "All" Passages</div><div class="item-sub">24 verses on justification</div></button>
-    <button class="slidemenu-item sub" data-target="refining-passages"><div class="item-title">Refining Passages</div><div class="item-sub">8 verses on sanctification</div></button>
-    <button class="slidemenu-item" data-target="against"><div class="item-title">Responding to Pro-ECT</div><div class="item-sub">Matt 25, Luke 16, Rev 14 & 20, 2 Thess 1</div></button>
-  </div>
-</nav>
 
 <main>
   <div class="container">
@@ -862,44 +598,25 @@
         <div class="section-rule"></div>
       </div>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title">On the word "Death"</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">The framework of ECT depends on a very specific understanding of <em>death</em>. In the traditional view, death is often equated with "eternal separation from God" — but this is pure eisegesis. Christian Universalism insists upon the plain meaning of the word, both in the straightforward physical sense and in the metaphorical sense of something being rendered powerless.</p>
-          <p class="prose">This is likely why many post-ECT Christian Universalists pass through annihilationism first. Choosing the plain meaning of a word immediately puts them out of step with the traditional view, which redefines the word to fit the target theology.</p>
-        </div>
+      <h3 class="subhead">On the word "Death"</h3>
+      <p class="prose">The framework of ECT depends on a very specific understanding of <em>death</em>. In the traditional view, death is often equated with "eternal separation from God" — but this is pure eisegesis. Christian Universalism insists upon the plain meaning of the word, both in the straightforward physical sense and in the metaphorical sense of something being rendered powerless.</p>
+      <p class="prose">This is likely why many post-ECT Christian Universalists pass through annihilationism first. Choosing the plain meaning of a word immediately puts them out of step with the traditional view, which redefines the word to fit the target theology.</p>
+
+      <h3 class="subhead">The Pervasive Influence of Tradition</h3>
+      <p class="prose">One major stumbling block is the sheer number of interpretational reference works — Bible dictionaries, study Bibles, concordances, commentaries — that have absorbed the ECT viewpoint. The word "death," for example, may be explicitly defined in these works as "eternal separation from God."</p>
+
+      <div class="callout">
+        <div class="callout-title">A case study: Trench's Synonyms</div>
+        <p>Richard Trench's <em>Synonyms of the New Testament</em> compares two words for punishment: <span class="greek">τιμωρία</span> and <span class="greek">κόλασις</span> — the latter used in Matthew 25:46. In Classical Greek, <span class="greek">κόλασις</span> refers almost exclusively to <strong>corrective</strong> punishment. But to read it as corrective in Matthew would allow Universalism, so Trench declared it a "very serious error" to do so.</p>
+        <p>Contemporaneously, Trench's friend F.D. Maurice — an Anglican minister — had written that <span class="greek">αἰώνιος</span> likely refers to "of the age," and is qualitative rather than quantitative. Though Maurice <em>denied</em> being a Universalist, his view so threatened the establishment that he was dismissed from King's College for teaching opinions "calculated to unsettle the minds of the theological students."</p>
+        <p>One year later, Trench published his lexicon explicitly excluding <em>correction</em> as a meaning of <span class="greek">κόλασις</span> — rendering the αἰώνιος debate moot and forcing the retributive reading of Matthew 25:46.</p>
       </div>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title">The Pervasive Influence of Tradition</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">One major stumbling block is the sheer number of interpretational reference works — Bible dictionaries, study Bibles, concordances, commentaries — that have absorbed the ECT viewpoint. The word "death," for example, may be explicitly defined in these works as "eternal separation from God."</p>
-          <div class="callout">
-            <div class="callout-title">A case study: Trench's Synonyms</div>
-            <p>Richard Trench's <em>Synonyms of the New Testament</em> compares two words for punishment: <span class="greek">τιμωρία</span> and <span class="greek">κόλασις</span> — the latter used in Matthew 25:46. In Classical Greek, <span class="greek">κόλασις</span> refers almost exclusively to <strong>corrective</strong> punishment. But to read it as corrective in Matthew would allow Universalism, so Trench declared it a "very serious error" to do so.</p>
-            <p>Contemporaneously, Trench's friend F.D. Maurice — an Anglican minister — had written that <span class="greek">αἰώνιος</span> likely refers to "of the age," and is qualitative rather than quantitative. Though Maurice <em>denied</em> being a Universalist, his view so threatened the establishment that he was dismissed from King's College for teaching opinions "calculated to unsettle the minds of the theological students."</p>
-            <p>One year later, Trench published his lexicon explicitly excluding <em>correction</em> as a meaning of <span class="greek">κόλασις</span> — rendering the αἰώνιος debate moot and forcing the retributive reading of Matthew 25:46.</p>
-          </div>
-          <p class="prose">Theological viewpoints have stickiness. We bring assumptions to the text (eisegesis), confirm them with resources (confirmation bias), and write new works carrying the same view — which become evidence for future works. Kuhn called this <em>paradigm entrenchment</em>; Gadamer called it the <em>hermeneutical circle</em>. Today we'd call it an echo chamber.</p>
-        </div>
-      </div>
+      <p class="prose">Theological viewpoints have stickiness. We bring assumptions to the text (eisegesis), confirm them with resources (confirmation bias), and write new works carrying the same view — which become evidence for future works. Kuhn called this <em>paradigm entrenchment</em>; Gadamer called it the <em>hermeneutical circle</em>. Today we'd call it an echo chamber.</p>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title">What This Means Hermeneutically</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">We are all subject to the echo chamber. A good student of the Bible ought to test traditional interpretations. The challenge is that the line between inspiration and interpretation is genuinely blurred. Something is <em>always</em> lost in translation. Scholars rise to clarify the ambiguous, and these clarifications become durable because of the echo chamber.</p>
-          <p class="prose">With God there is no "strength in numbers" if we are all wrong about ECT (Romans 3:4). If ECT is incorrect, then a large portion of the Western Christian world has cast a dark shadow on the love and mercy of God. For this reason — and because of Jesus' stark warnings against those who cause little ones to stumble — the burden of proof should lie with those who hold ECT.</p>
-        </div>
-      </div>
+      <h3 class="subhead">What This Means Hermeneutically</h3>
+      <p class="prose">We are all subject to the echo chamber. A good student of the Bible ought to test traditional interpretations. The challenge is that the line between inspiration and interpretation is genuinely blurred. Something is <em>always</em> lost in translation. Scholars rise to clarify the ambiguous, and these clarifications become durable because of the echo chamber.</p>
+      <p class="prose">With God there is no "strength in numbers" if we are all wrong about ECT (Romans 3:4). If ECT is incorrect, then a large portion of the Western Christian world has cast a dark shadow on the love and mercy of God. For this reason — and because of Jesus' stark warnings against those who cause little ones to stumble — the burden of proof should lie with those who hold ECT.</p>
     </section>
 
     <div class="divider"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
@@ -916,7 +633,7 @@
       <p class="prose">In May of 2026 I encountered a book called <em>The Christian Universalist</em>. Almost overnight I was overjoyed — not only did God desire all to come to reconciliation, but he has made a way for it to happen. A God who is truly all-in-all ignited my then-laconic spirituality, and I wanted to see if this view could be honestly defended from the text. I was overjoyed to find that it can.</p>
 
       <h3 class="subhead">Objections that wouldn't resolve</h3>
-      <div class="objgrid">
+      <div class="boxgrid">
         <div class="item"><div class="t">Inconsistent with God's mercy</div><div class="d">Eternal hell and annihilation don't fit God's revealed love and mercy.</div></div>
         <div class="item"><div class="t">Casts doubt on God's character</div><div class="d">If God is merciful and yet cannot save, his omnipotence is in question.</div></div>
         <div class="item"><div class="t">Disproportionate punishment</div><div class="d">Infinite punishment for finite sin violates eye-for-an-eye.</div></div>
@@ -925,8 +642,8 @@
         <div class="item"><div class="t">Ignores restorative justice</div><div class="d">Given the choice between reconciliation and retribution — which does God prefer?</div></div>
       </div>
 
-      <h3 class="subhead" id="questions">The Questions That Haunted Me</h3>
-      <div class="objgrid">
+      <h3 class="subhead">The Questions That Haunted Me</h3>
+      <div class="boxgrid">
         <div class="item"><div class="t">What of aborted babies?</div><div class="d">ECT and annihilationism have no good answer — only "age of accountability" arguments with scant scriptural support. Christian Universalism has a ready and comforting answer.</div></div>
         <div class="item"><div class="t">What of those who never heard?</div><div class="d">Partial reconciliation requires philosophical gymnastics here, from "they just go to hell, who are you to question" to throwing hands up entirely.</div></div>
         <div class="item"><div class="t">Does eternity hinge on an accident of timing?</div><div class="d">Two men in a war. One dies by a bullet. The other lives to attend a Billy Graham revival. One goes to hell forever; one is saved. Really?</div></div>
@@ -936,95 +653,59 @@
       </div>
       <p class="closing-line">ECT offers no good answer to any of these questions. Indeed, these questions arise <em>because</em> of our collective adherence to the doctrine.</p>
 
-      <h3 class="subhead" id="emotional-reasoning">On the Charge of "Emotional" Reasoning</h3>
+      <h3 class="subhead">On the Charge of "Emotional" Reasoning</h3>
       <p class="prose">A common objection to Christian Universalism is that its proponents are led by emotion rather than careful exegesis. The charge proves too much.</p>
+      <p class="prose">The Reformed tradition has never treated emotion as inadmissible in theological reasoning. Edwards argued in <em>Religious Affections</em> that "true religion lies very much in the affections," and his preaching on hell — vivid imagery, saints rejoicing over the damned — is unmistakably emotional appeal in service of doctrine. Piper instructs preachers to "stir up holy affections" so hearers "feel the reality" of hell. Platt's missions appeals are built on visceral horror. The tradition cannot leverage emotion when it serves ECT and disqualify it when it raises questions about ECT. That is special pleading.</p>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title">The Reformed tradition already uses emotion</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">The Reformed tradition has never treated emotion as inadmissible in theological reasoning. Edwards argued in <em>Religious Affections</em> that "true religion lies very much in the affections," and his preaching on hell — vivid imagery, saints rejoicing over the damned — is unmistakably emotional appeal in service of doctrine. Piper instructs preachers to "stir up holy affections" so hearers "feel the reality" of hell. Platt's missions appeals are built on visceral horror.</p>
-          <p class="prose">The tradition cannot leverage emotion when it serves ECT and disqualify it when it raises questions about ECT. That is special pleading.</p>
-        </div>
+      <p class="prose">The framing of "reason versus emotion" is also un-Reformed. If total depravity is true, sin distorts the mind as thoroughly as the heart. Calvin himself spoke of the noetic effects of the Fall. The appeal to "reason over emotion" in hermeneutics borrows from Enlightenment rationalism, not Scripture. Both faculties are fallen; both require sanctification; both are legitimate inputs when submitted to the text.</p>
+      <p class="prose">Scripture itself never treats emotions as monolithic. It distinguishes them by source and orientation: sinful emotions arise from self-oriented desire (James 4:1), while compassion, grief, and longing for justice are commanded postures throughout the canon.</p>
+
+      <div class="callout">
+        <div class="callout-title">Inspired models</div>
+        <p>When Paul writes of his <em>"great sorrow and unceasing anguish"</em> over his kinsmen's possible damnation (Romans 9:2–3), and Christ weeps over Jerusalem (Matthew 23:37), these are inspired models of how a holy heart responds to the prospect of human destruction.</p>
       </div>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title">"Reason vs. emotion" is un-Reformed framing</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">If total depravity is true, sin distorts the mind as thoroughly as the heart. Calvin himself spoke of the noetic effects of the Fall. The appeal to "reason over emotion" in hermeneutics borrows from Enlightenment rationalism, not Scripture. Both faculties are fallen; both require sanctification; both are legitimate inputs when submitted to the text.</p>
-          <p class="prose">Scripture itself never treats emotions as monolithic. It distinguishes them by source and orientation: sinful emotions arise from self-oriented desire (James 4:1), while compassion, grief, and longing for justice are commanded postures throughout the canon.</p>
-          <div class="callout">
-            <div class="callout-title">Inspired models</div>
-            <p>When Paul writes of his <em>"great sorrow and unceasing anguish"</em> over his kinsmen's possible damnation (Romans 9:2–3), and Christ weeps over Jerusalem (Matthew 23:37), these are inspired models of how a holy heart responds to the prospect of human destruction.</p>
-          </div>
-        </div>
+      <p class="prose">This reframes the universalist's engagement entirely. It is not a self-oriented attempt to soften God, but:</p>
+
+      <div class="boxgrid">
+        <div class="item"><div class="t">Grief that image-bearers would suffer forever</div></div>
+        <div class="item"><div class="t">A sense that finite sin receiving infinite punishment violates proportionality</div></div>
+        <div class="item"><div class="t">Longing for God's glory to be vindicated through reconciliation rather than division</div></div>
       </div>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title">What the universalist's grief actually is</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">Christian Universalism's engagement is not a self-oriented attempt to soften God, but:</p>
-          <div class="objgrid">
-            <div class="item"><div class="t">Grief that image-bearers would suffer forever</div></div>
-            <div class="item"><div class="t">A sense that finite sin receiving infinite punishment violates proportionality</div></div>
-            <div class="item"><div class="t">Longing for God's glory to be vindicated through reconciliation rather than division</div></div>
-          </div>
-          <p class="prose">These map directly onto the emotional postures Scripture commends in Paul and Christ Himself.</p>
-          <p class="prose">Furthermore, texts about God's character — that God is love (1 John 4:8), desires all to be saved (1 Timothy 2:4), and is not willing that any should perish (2 Peter 3:9) — <em>are themselves the text</em>. Weighing them against judgment passages is exegesis, not sentiment.</p>
-          <p class="prose">The proper test is not whether emotion is present — it always is, on both sides — but whether it drives one toward Scripture or away from it. A sinful reaction avoids the text; a sanctified reaction drives deeper, wrestling with difficult passages and weighing the witness of the whole canon. The emotion confirms what the exegesis suggests; it does not replace it.</p>
-        </div>
-      </div>
+      <p class="prose">These map directly onto the emotional postures Scripture commends in Paul and Christ Himself. Furthermore, texts about God's character — that God is love (1 John 4:8), desires all to be saved (1 Timothy 2:4), and is not willing that any should perish (2 Peter 3:9) — <em>are themselves the text</em>. Weighing them against judgment passages is exegesis, not sentiment.</p>
+      <p class="prose">The proper test is not whether emotion is present — it always is, on both sides — but whether it drives one toward Scripture or away from it. A sinful reaction avoids the text; a sanctified reaction drives deeper, wrestling with difficult passages and weighing the witness of the whole canon. The emotion confirms what the exegesis suggests; it does not replace it.</p>
 
-      <h3 class="subhead" id="assurance">ECT Cannot Coexist with Assurance of Salvation</h3>
+      <h3 class="subhead">ECT Cannot Coexist with Assurance of Salvation</h3>
       <p class="prose">Evangelicalism (especially Reformed branches) grants assurance of salvation through "once saved always saved" — but this assurance rests on a foundation the system itself undermines.</p>
+      <p class="prose">The same tradition affirms:</p>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title">The tensions within the Reformed system</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">The same tradition affirms:</p>
-          <div class="objgrid">
-            <div class="item"><div class="t">Vessels of wrath</div><div class="d">God creates vessels of wrath prepared for destruction (Romans 9:22).</div></div>
-            <div class="item"><div class="t">Temporary faith</div><div class="d">The reprobate may experience a "temporary faith" indistinguishable from the real thing — a problem Edwards and the Puritans worried over at length.</div></div>
-            <div class="item"><div class="t">Hidden vs. revealed will</div><div class="d">God's secret will may diverge from his revealed will.</div></div>
-            <div class="item"><div class="t">Waiting for assurance</div><div class="d">The Westminster Confession concedes that true believers may wait long years for assurance — and may lose it altogether.</div></div>
-          </div>
-          <p class="prose">For the self-assured, these tensions remain abstract. The doctrine functions because the believer never seriously entertains being on the wrong side of it. But for those whose experience has taught them that their own perceptions can deceive them, the tensions become unbearable, and rightly so. They are not malfunctioning; they are reading the doctrine correctly — and arguably more deeply than the self-assured believers. They are the canary in the mine.</p>
-        </div>
+      <div class="boxgrid">
+        <div class="item"><div class="t">Vessels of wrath</div><div class="d">God creates vessels of wrath prepared for destruction (Romans 9:22).</div></div>
+        <div class="item"><div class="t">Temporary faith</div><div class="d">The reprobate may experience a "temporary faith" indistinguishable from the real thing — a problem Edwards and the Puritans worried over at length.</div></div>
+        <div class="item"><div class="t">Hidden vs. revealed will</div><div class="d">God's secret will may diverge from his revealed will.</div></div>
+        <div class="item"><div class="t">Waiting for assurance</div><div class="d">The Westminster Confession concedes that true believers may wait long years for assurance — and may lose it altogether.</div></div>
       </div>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title">The doctrine eats its own assurance</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">The reasoning runs like this. Told to "just trust God" when their moral intuitions recoil at hell, they learn to treat their moral intuitions as unreliable. But once that habit is formed, it cannot be quarantined. It turns inward on their confession of faith itself.</p>
-          <blockquote class="bq">
-            <p class="quote"><em>Did I really believe? Was it enough? How would I know?</em></p>
-          </blockquote>
-          <p class="prose">The doctrine of perseverance offers no exit, because the question is precisely whether one was ever truly in.</p>
-          <p class="prose">Here ECT generates its own worst nightmare. To appeal to God's goodness as a guarantee against the worst-case scenario, one must first believe God is good — but ECT has already conceded that God is willing to inflict unending torment on conscious beings. The character question is closed before the assurance question is opened.</p>
-          <div class="callout">
-            <div class="callout-title">The unspeakable scenario</div>
-            <p>What principled restraint, then, prevents the deepest cruelty: a life lived in hopeful belief of election, revealed at judgment to have been the elaborate setup of a vessel of wrath? What torment could be greater than that?</p>
-          </div>
-          <p class="prose">The doctrine, in other words, eats its own assurance. It asks the believer to trust the character of a being whose character it has just impeached. For the self-assured, this contradiction is suppressed through psychological habit. For more sensitive souls, it cannot be. Fear is the rational response to a two-faced God.</p>
-          <p class="prose">Christian Universalism, then, is not wishful thinking but the recovery of coherence. It is the claim that God's character, as revealed in Christ, is what it appears to be — and that the gap between the revealed God and the hidden God, which ECT requires and which destroys assurance, does not in fact exist.</p>
-        </div>
+      <p class="prose">For the self-assured, these tensions remain abstract. The doctrine functions because the believer never seriously entertains being on the wrong side of it. But for those whose experience has taught them that their own perceptions can deceive them, the tensions become unbearable, and rightly so. They are not malfunctioning; they are reading the doctrine correctly — and arguably more deeply than the self-assured believers. They are the canary in the mine.</p>
+
+      <p class="prose">The reasoning runs like this. Told to "just trust God" when their moral intuitions recoil at hell, they learn to treat their moral intuitions as unreliable. But once that habit is formed, it cannot be quarantined. It turns inward on their confession of faith itself.</p>
+
+      <blockquote class="bq">
+        <p class="quote"><em>Did I really believe? Was it enough? How would I know?</em></p>
+      </blockquote>
+
+      <p class="prose">The doctrine of perseverance offers no exit, because the question is precisely whether one was ever truly in. Here ECT generates its own worst nightmare. To appeal to God's goodness as a guarantee against the worst-case scenario, one must first believe God is good — but ECT has already conceded that God is willing to inflict unending torment on conscious beings. The character question is closed before the assurance question is opened.</p>
+
+      <div class="callout">
+        <div class="callout-title">The unspeakable scenario</div>
+        <p>What principled restraint, then, prevents the deepest cruelty: a life lived in hopeful belief of election, revealed at judgment to have been the elaborate setup of a vessel of wrath? What torment could be greater than that?</p>
       </div>
 
-      <div class="callout" style="margin-top: 2rem;">
+      <p class="prose">The doctrine, in other words, eats its own assurance. It asks the believer to trust the character of a being whose character it has just impeached. For the self-assured, this contradiction is suppressed through psychological habit. For more sensitive souls, it cannot be. Fear is the rational response to a two-faced God.</p>
+      <p class="prose">Christian Universalism, then, is not wishful thinking but the recovery of coherence. It is the claim that God's character, as revealed in Christ, is what it appears to be — and that the gap between the revealed God and the hidden God, which ECT requires and which destroys assurance, does not in fact exist.</p>
+
+      <div class="callout">
         <div class="callout-title">In sum</div>
         <p>The question is never whether emotion belongs in theological reasoning — it always does, on every side of every debate — but whether a given emotion is rightly sourced and rightly oriented.</p>
         <p>Emotions arising from self-protection, fear of consequence, or resistance to God's revealed character are properly suspect. But emotions arising from the Spirit's renewal of the heart, oriented outward toward God's glory, the flourishing of image-bearers, and the vindication of justice, are precisely the affections Scripture commands and Christ Himself models.</p>
@@ -1048,25 +729,11 @@
       </blockquote>
       <p class="prose">We learn the character of God through his revealed word, and we are made in his image. People become like the God they believe. Beware how you see God — it can change who you are.</p>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title">Andrea Yates</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">Many are unaware that Andrea Yates, who killed her five young children in a bathtub in 2001, did so because of her belief in eternal conscious torment. Her primary concern was that she would be unable to lead her children to saving faith. Because she believed in the "age of accountability," she reasoned that killing them <em>before</em> that age would save them from hell forever. Sadly, other than calling her psychotic, if the assumptions of ECT are true, her act was a perfectly reasonable one.</p>
-        </div>
-      </div>
+      <h3 class="subhead">Andrea Yates</h3>
+      <p class="prose">Many are unaware that Andrea Yates, who killed her five young children in a bathtub in 2001, did so because of her belief in eternal conscious torment. Her primary concern was that she would be unable to lead her children to saving faith. Because she believed in the "age of accountability," she reasoned that killing them <em>before</em> that age would save them from hell forever. Sadly, other than calling her psychotic, if the assumptions of ECT are true, her act was a perfectly reasonable one.</p>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title">American Retributive Justice</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">American evangelicalism leans heavily toward ECT, and it begs the question: why does justice in the United States lean so heavily on retributive vs. restorative justice? A full examination is out of scope here, but it does tend to look like an artifact of our theological assumptions.</p>
-        </div>
-      </div>
+      <h3 class="subhead">American Retributive Justice</h3>
+      <p class="prose">American evangelicalism leans heavily toward ECT, and it begs the question: why does justice in the United States lean so heavily on retributive vs. restorative justice? A full examination is out of scope here, but it does tend to look like an artifact of our theological assumptions.</p>
     </section>
 
     <div class="divider"><div class="line"></div><div class="star">✦</div><div class="line"></div></div>
@@ -1082,7 +749,7 @@
       <p class="prose">No theology can be defended by proof-texting, and that's not the intention here. The aim is to show that on first pass, the Bible has sufficient evidence to support the doctrine of eventual reconciliation. The passages are separated into justification and sanctification.</p>
 
       <h3 class="subhead" id="all-passages">The "All" Passages <span class="light">(Justification)</span></h3>
-      <p style="font-size: 0.75rem; color: #78716c; margin-top: -0.5rem; margin-bottom: 1rem;">Verses marked <span class="key-dot"></span> are the strongest exegetical anchors.</p>
+      <p style="font-size: 0.8125rem; color: #78716c; margin-top: -0.5rem; margin-bottom: 1rem; font-family: 'Cardo', Georgia, serif; font-style: italic;">Verses marked <span class="key-dot"></span> are the strongest exegetical anchors.</p>
       <div class="verselist" id="justification-list"></div>
 
       <h3 class="subhead" id="refining-passages">The Refining Passages <span class="light">(Sanctification)</span></h3>
@@ -1124,34 +791,20 @@
       <div class="verseblock"><p>"Depart from me, you who are cursed, into the eternal fire prepared for the devil and his angels... Then they will go away to eternal punishment, but the righteous to eternal life."</p></div>
       <p class="prose">Matthew 25:46 is arguably the strongest argument for ECT. The whole weight rests on two Greek words.</p>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title"><span class="greek">αἰώνιος</span> — "eternal" or "of the age"?</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">For ECT adherents, <span class="greek">αἰώνιος</span> is synonymous with everlasting. But scripturally this isn't always the case. The actual meaning is "of the age," and context decides whether it lasts the entire age or is something of an age that eventually ends.</p>
-          <div class="gex"><div class="ref">Romans 16:25-27</div><p class="text">"The mystery hidden for long (αἰώνιος) ages past, but now revealed."</p><div class="note">Clearly bounded — the αἰώνιος ages ended.</div></div>
-          <div class="gex"><div class="ref">2 Timothy 1:9</div><p class="text">"Grace given us in Christ Jesus before the beginning of time (πρὸ χρόνων αἰωνίων)."</p><div class="note">A starting point — not endless from eternity past.</div></div>
-          <div class="gex"><div class="ref">Jude 7</div><p class="text">"Sodom and Gomorrah... serve as an example of those who suffer the punishment of eternal (αἰώνιος) fire."</p><div class="note">The fire isn't still burning.</div></div>
-          <div class="gex"><div class="ref">Genesis 49:26 (LXX)</div><p class="text">"Your father's blessings are greater than the blessings of the ancient (αἰώνιος) mountains."</p><div class="note">Used spatially/qualitatively, not durationally.</div></div>
-          <div class="gex"><div class="ref">Numbers 25:13 (LXX)</div><p class="text">"A covenant of a lasting (αἰώνιος) priesthood."</p></div>
-          <div class="gex"><div class="ref">Habakkuk 3:6 (LXX)</div><p class="text">"The ancient (αἰώνιος) mountains crumbled."</p><div class="note">They crumbled — so αἰώνιος clearly isn't 'endless' here.</div></div>
-          <p class="prose">In Scripture, <span class="greek">αἰώνιος</span> does not always mean everlasting. It can mean "of the age." Linguistically, it's a toss-up.</p>
-        </div>
-      </div>
+      <h3 class="subhead"><span class="greek">αἰώνιος</span> — "eternal" or "of the age"?</h3>
+      <p class="prose">For ECT adherents, <span class="greek">αἰώνιος</span> is synonymous with everlasting. But scripturally this isn't always the case. The actual meaning is "of the age," and context decides whether it lasts the entire age or is something of an age that eventually ends.</p>
+      <div class="gex"><div class="ref">Romans 16:25-27</div><p class="text">"The mystery hidden for long (αἰώνιος) ages past, but now revealed."</p><div class="note">Clearly bounded — the αἰώνιος ages ended.</div></div>
+      <div class="gex"><div class="ref">2 Timothy 1:9</div><p class="text">"Grace given us in Christ Jesus before the beginning of time (πρὸ χρόνων αἰωνίων)."</p><div class="note">A starting point — not endless from eternity past.</div></div>
+      <div class="gex"><div class="ref">Jude 7</div><p class="text">"Sodom and Gomorrah... serve as an example of those who suffer the punishment of eternal (αἰώνιος) fire."</p><div class="note">The fire isn't still burning.</div></div>
+      <div class="gex"><div class="ref">Genesis 49:26 (LXX)</div><p class="text">"Your father's blessings are greater than the blessings of the ancient (αἰώνιος) mountains."</p><div class="note">Used spatially/qualitatively, not durationally.</div></div>
+      <div class="gex"><div class="ref">Numbers 25:13 (LXX)</div><p class="text">"A covenant of a lasting (αἰώνιος) priesthood."</p></div>
+      <div class="gex"><div class="ref">Habakkuk 3:6 (LXX)</div><p class="text">"The ancient (αἰώνιος) mountains crumbled."</p><div class="note">They crumbled — so αἰώνιος clearly isn't 'endless' here.</div></div>
+      <p class="prose">In Scripture, <span class="greek">αἰώνιος</span> does not always mean everlasting. It can mean "of the age." Linguistically, it's a toss-up.</p>
 
-      <div class="collapsible">
-        <button class="collapsible-btn">
-          <span class="title"><span class="greek">κόλασις</span> — retributive or restorative?</span>
-          <svg class="chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-        <div class="collapsible-content">
-          <p class="prose">In Aristotle's <em>Rhetoric</em> 1.10.17, he explicitly distinguishes <span class="greek">τιμωρία</span> from <span class="greek">κόλασις</span>: the former is for the sake of the one inflicting it; the latter for the sake of the one suffering it. <span class="greek">κόλασις</span> is corrective.</p>
-          <p class="prose">A caveat: Aristotle wrote ~350 years before Jesus, and the word likely carried more connotations by the New Testament era. ECT proponents push this to say the corrective sense is no longer the meaning — but the classical definition remains a valid one, even if additional senses developed.</p>
-          <p class="prose">So the word can mean either restorative or retributive justice.</p>
-        </div>
-      </div>
+      <h3 class="subhead"><span class="greek">κόλασις</span> — retributive or restorative?</h3>
+      <p class="prose">In Aristotle's <em>Rhetoric</em> 1.10.17, he explicitly distinguishes <span class="greek">τιμωρία</span> from <span class="greek">κόλασις</span>: the former is for the sake of the one inflicting it; the latter for the sake of the one suffering it. <span class="greek">κόλασις</span> is corrective.</p>
+      <p class="prose">A caveat: Aristotle wrote ~350 years before Jesus, and the word likely carried more connotations by the New Testament era. ECT proponents push this to say the corrective sense is no longer the meaning — but the classical definition remains a valid one, even if additional senses developed.</p>
+      <p class="prose">So the word can mean either restorative or retributive justice.</p>
 
       <h3 class="subhead">The four-cell matrix</h3>
       <div class="matrix">
@@ -1231,7 +884,6 @@
 </button>
 
 <script>
-// ========== VERSE DATA & LIST BUILDING ==========
 var justificationVerses = [
   { ref: '2 Samuel 14:14', text: 'We must all die; we are like water spilled on the ground, which cannot be recovered. But that is not what God desires; rather, he devises ways so that a banished person does not remain banished from him.' },
   { ref: 'Ezekiel 33:11', text: 'Say to them, "As surely as I live, declares the Sovereign Lord, I take no pleasure in the death of the wicked, but rather that they turn from their ways and live."' },
@@ -1276,51 +928,38 @@ function buildVerseList(containerId, verses) {
     var v = verses[i];
     var div = document.createElement('div');
     div.className = 'vitem' + (v.key ? ' key' : '');
-    var btn = document.createElement('button');
-    btn.className = 'vitem-btn';
-    btn.innerHTML =
-      '<span class="ref-line">' +
-      (v.key ? '<span class="key-dot"></span>' : '') +
-      '<span class="ref">' + v.ref + '</span>' +
-      '</span>' +
-      '<svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>';
-    var content = document.createElement('div');
-    content.className = 'vitem-content';
+    var refLine = document.createElement('div');
+    refLine.className = 'ref-line';
+    if (v.key) {
+      var dot = document.createElement('span');
+      dot.className = 'key-dot';
+      refLine.appendChild(dot);
+    }
+    var refSpan = document.createElement('span');
+    refSpan.className = 'ref';
+    refSpan.textContent = v.ref;
+    refLine.appendChild(refSpan);
+    div.appendChild(refLine);
+
     var p = document.createElement('p');
     p.className = 'text';
     p.textContent = '"' + v.text + '"';
-    content.appendChild(p);
+    div.appendChild(p);
+
     if (v.note) {
       var note = document.createElement('div');
       note.className = 'note';
       note.textContent = v.note;
-      content.appendChild(note);
+      div.appendChild(note);
     }
-    div.appendChild(btn);
-    div.appendChild(content);
     container.appendChild(div);
-    (function(item) {
-      btn.addEventListener('click', function() {
-        item.classList.toggle('open');
-      });
-    })(div);
   }
 }
 
-// ========== INTERACTIONS ==========
 document.addEventListener('DOMContentLoaded', function() {
   buildVerseList('justification-list', justificationVerses);
   buildVerseList('refining-list', refiningVerses);
 
-  // Collapsibles
-  var collapsibles = document.querySelectorAll('.collapsible-btn');
-  for (var i = 0; i < collapsibles.length; i++) {
-    collapsibles[i].addEventListener('click', function() {
-      this.parentElement.classList.toggle('open');
-    });
-  }
-
-  // Navigation (tabs and slidemenu)
   function scrollToSection(id) {
     var el = document.getElementById(id);
     if (!el) return;
@@ -1332,26 +971,9 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var j = 0; j < navButtons.length; j++) {
     navButtons[j].addEventListener('click', function() {
       scrollToSection(this.getAttribute('data-target'));
-      closeMenu();
     });
   }
 
-  // Slide menu
-  var slidemenu = document.getElementById('slidemenu');
-  var backdrop = document.getElementById('backdrop');
-  function openMenu() {
-    slidemenu.classList.add('open');
-    backdrop.classList.add('open');
-  }
-  function closeMenu() {
-    slidemenu.classList.remove('open');
-    backdrop.classList.remove('open');
-  }
-  document.getElementById('menuOpenBtn').addEventListener('click', openMenu);
-  document.getElementById('menuCloseBtn').addEventListener('click', closeMenu);
-  backdrop.addEventListener('click', closeMenu);
-
-  // Scroll-related: active tab + back-to-top
   var totop = document.getElementById('totop');
   var sections = ['overview', 'terminology', 'philosophical', 'social', 'for', 'against'];
   var tabs = document.querySelectorAll('.tab');
